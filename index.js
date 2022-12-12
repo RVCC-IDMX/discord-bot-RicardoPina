@@ -25,6 +25,10 @@ client.once(Events.ClientReady, () => {
 client.on(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
+  if (interaction.commandName === 'secretping') {
+    await interaction.reply({ content: 'Secret Pong!', ephemeral: true });
+  }
+
   const command = client.commands.get(interaction.commandName);
 
   if (!command) return;
