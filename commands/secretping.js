@@ -5,6 +5,6 @@ module.exports = {
     .setName('secretping')
     .setDescription('Replies with Secret Pong!'),
   async execute(interaction) {
-    await interaction.reply('Secret Pong!');
+    await interaction.reply({ content: 'Secret Pong!', ephemeral: true });
   },
 };

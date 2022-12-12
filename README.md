@@ -1,6 +1,6 @@
 # Sir Ricardo Servesalot
 
-<img src="img/sir-servesalot-logo.png" width = '100'>
+<img src="img/sir-servesalot-logo.png" width = '200'>
 
 ## Description
 
