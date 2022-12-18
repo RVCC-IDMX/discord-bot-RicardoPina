@@ -44,6 +44,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
   if (!command) return;
 
+
   try {
     await command.execute(interaction);
   }
