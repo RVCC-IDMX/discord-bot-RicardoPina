@@ -26,8 +26,8 @@ module.exports = {
     .addStringOption((option) => option.setName('eyes')
       .setDescription('design animal\'s eyes')
       .setRequired((false))
-      .setMinLength(1)
-      .setMaxLength(3))
+      .setMinLength(2)
+      .setMaxLength(2))
     .addStringOption((option) => option.setName('tongue')
       .setDescription('design animal\'s tongue')
       .setRequired((false))
@@ -43,9 +43,9 @@ module.exports = {
 
     const cow = {
       text: 'hello!!',
-      f: "fat-cow",
-      e: 'oO',
-      T: 'v',
+      f: "bearface",
+      e: 'UU',
+      T: '',
     };
 
     if (!(interaction.options.getString('message') == undefined))
