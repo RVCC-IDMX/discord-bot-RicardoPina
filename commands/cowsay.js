@@ -35,7 +35,7 @@ module.exports = {
       .setMaxLength(2)),
   async execute(interaction) {
 
-    newCowList = (await cowList).map(x => {
+    const newCowList = (await cowList).map(x => {
       return x.replace('.cow', '');
     });
 
