@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder } = require('discord.js');
 const cowsay = require('cowsay');
 
 function get_cows(error, cow_names) {
@@ -19,7 +19,7 @@ module.exports = {
     .setDescription('Replies with a cow!')
     .addStringOption((option) => option.setName('message')
       .setDescription('The message to print')
-      .setMaxLength(199))
+      .setMaxLength(1950))
     .addStringOption((option) => option.setName('animal')
       .setDescription('choose the animal')
       .setRequired((false)))
@@ -35,14 +35,19 @@ module.exports = {
       .setMaxLength(2)),
   async execute(interaction) {
 
-    const newCowList = (await cowList).map(x => {
+    newCowList = (await cowList).map(x => {
       return x.replace('.cow', '');
     });
 
-
+    const row = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setLabel('View cows list!')
+          .setURL('https://github.com/piuccio/cowsay/tree/master/cows')
+          .setStyle(ButtonStyle.Link))
 
     const cow = {
-      text: 'hello!!',
+      text: 'hey... \nyou got honey by chance?',
       f: "bearface",
       e: 'UU',
       T: '',
@@ -58,24 +63,15 @@ module.exports = {
       cow.T = interaction.options.getString('tongue');
 
     if (!(interaction.options.getString('animal') == undefined) && (newCowList.includes(interaction.options.getString('animal')))) {
-      cow.f = interaction.options.getString('animal');
+      cow.f = interaction.options.getString('animal').toLowerCase();
     } else if (!(interaction.options.getString('animal') == undefined)) {
-      await interaction.reply('That cow is no cow in cowsay cow list.');
+      await interaction.reply({ content: 'That cow is no cow in cowsay cow list. Check the cow list on the official repo!\n', components: [row] });
       return
     }
 
-    // if (!(interaction.options.getString('animal') == undefined)) {
-    //   if ((newCowList.includes(interaction.options.getString('animal'))))
-    //     cow.f = interaction.options.getString('animal');
-    // }
-
-    // if (!(interaction.options.getString('mode') == undefined))
-    //   cow.mode = interaction.options.getString('mode');
-
     const cowResponse = cowsay.say(cow).replaceAll('`', '´');
 
-
-    if ((cowResponse) > 1999) {
+    if ((cowResponse) > 1994) {
       await interaction.reply('The message is too long, try again!');
     } else {
       await interaction.reply(`\`\`\`${cowsay.say(cow).replaceAll('`', '´')}\`\`\``);

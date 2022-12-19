@@ -4,7 +4,6 @@ const path = require('node:path');
 const {
   Client, Collection, Events, GatewayIntentBits, EmbedBuilder,
 } = require('discord.js');
-
 const { token } = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -13,6 +12,7 @@ client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter((file) => file.endsWith('.js'));
 
+
 const embed = new EmbedBuilder()
   .setTitle('Commands:')
   .setColor(0x0099FF)
@@ -20,7 +20,9 @@ const embed = new EmbedBuilder()
   .setDescription('To view all of the command options, you can type / on the message bar.')
   .setThumbnail('https://i.imgur.com/4IQbsx4.png');
 
+
 let embedCount = 0;
+
 
 for (const file of commandFiles) {
   const filePath = path.join(commandsPath, file);
@@ -38,6 +40,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
     console.log(`Printed embed ${embedCount} time(s)`);
     await interaction.reply({ embeds: [embed] });
   }
+
   const command = client.commands.get(interaction.commandName);
 
   if (!interaction.isChatInputCommand()) return;
